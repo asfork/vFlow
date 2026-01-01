@@ -42,7 +42,7 @@ class CalculationModule : BaseModule() {
             id = "operator",
             name = "符号",
             staticType = ParameterType.ENUM,
-            options = listOf("+", "-", "*", "/"),
+            options = listOf("+", "-", "*", "/", "%"),
             defaultValue = "+",
             acceptsMagicVariable = false
         ),
@@ -98,6 +98,12 @@ class CalculationModule : BaseModule() {
                     return ExecutionResult.Failure("计算错误", "除数不能为零。")
                 }
                 num1 / num2
+            }
+            "%" -> {
+                if (num2 == 0.0) {
+                    return ExecutionResult.Failure("计算错误", "除数不能为零。")
+                }
+                num1 % num2
             }
             else -> return ExecutionResult.Failure("计算错误", "无效的运算符: '${operator}'.")
         }
